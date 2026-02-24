@@ -1,41 +1,53 @@
 import random
 
-print ('***********************')
-print('****Jogo adivinhação****')
-print('************************')
+print ("**********************")
+print ("***jogo adivinhação***")
+print ("**********************")
 
-numero_secreto = random.randint(1, 100)
-total_tentativas = 5
+numero_secreto = random.randrange(1,101)
+total_tentativas = 15
+rodada = 1
+dificuldade = (1, 2, 3)
 
 
+print("Qual nível você escolhe?")
+print("(1) Fácil (2) Médio (3) Difícil")
 
-for rodada in range(1, total_tentativas + 1):
-    
-    chute_str = input("Digite o seu numero de 1 a 100: ")
-    
+dificuldade = int(input("Defina o nível: "))
+
+if(dificuldade == 1):
+    total_tentativas = 15
+if(dificuldade == 2):
+    total_tentativas = 10
+elif(dificuldade == 3):
+    total_tentativas = 5
+
+print("Suas tentativas: ", total_tentativas)
+
+
+for rodada in range (1, total_tentativas + 1):
+    print("Tentativa {} de {}".format(rodada, total_tentativas))
+
+
+    chute_str = input("Digite o seu numero: ")
     chute = int(chute_str)
 
-    if (chute < 1 or chute > 100):
+    if(chute <1 or chute > 100):
         print("O número deve ser entre 1 e 100")
         continue
-
-    print("Tentativa {} de {}".format(rodada, total_tentativas))
-    print("Seu numero é:", chute_str)
 
     acertou = chute == numero_secreto
     maior = chute > numero_secreto
     menor = chute < numero_secreto
 
     if(acertou):
-        print("Você Acertou!!")
+        print("Você acertou")
         break
-
     else:
         if(maior):
-            print("O seu chute foi maior que o numero secreto")
-        elif (menor):
-            print("O seu chute foi menor que o numero secreto")
-    rodada = rodada +1
+            print("abaixa")
+        elif(menor):
+            print("Aumenta")
 
 print(numero_secreto)
-print("Fim de jogo!")
+print("fim de jogo!")
