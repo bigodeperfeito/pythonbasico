@@ -1,53 +1,60 @@
 import random
 
-print ("**********************")
-print ("***jogo adivinhação***")
-print ("**********************")
-
-numero_secreto = random.randrange(1,101)
-total_tentativas = 15
-rodada = 1
-dificuldade = (1, 2, 3)
+#Cores no Terminal PY
+VERMELHO = "\033[31m"
+VERDE = "\033[32m"
+AMARELO = "\033[33m"
+AZUL = "\033[34m"
+RESET = "\033[0m"
 
 
-print("Qual nível você escolhe?")
-print("(1) Fácil (2) Médio (3) Difícil")
+print(f"{AZUL}**************************{RESET}")
+print(f"{AZUL}*****Jogo adivinhação*****{RESET}")
+print(f"{AZUL}**************************{RESET}")
 
-dificuldade = int(input("Defina o nível: "))
+numero_secreto = random.randrange(1, 101)
+total_tentativas = 0
 
-if(dificuldade == 1):
-    total_tentativas = 15
-if(dificuldade == 2):
-    total_tentativas = 10
-elif(dificuldade == 3):
-    total_tentativas = 5
+print("Qual dificuldade você gostaria de jogar? ")
+print("(1) Fácil (2) Médio (3) Difícil ")
+
+while True:
+    try:
+        dificuldade = int(input("Defina a dificuldade (1-2-3): "))
+
+        if dificuldade == 1:
+            total_tentativas = 10
+            break
+        elif dificuldade == 2:
+            total_tentativas = 5
+            break
+        elif dificuldade == 3:
+            total_tentativas = 3
+            break
+        else:
+            print(f"{AMARELO}Opção inválida! Digite 1, 2 ou 3.{RESET}")
+    except ValueError:
+        print(f"{VERMELHO}Por favor, digite um número inteiro.{RESET}")
+
+print(f"Você terá {total_tentativas} tentativas.")
+
 
 print("Suas tentativas: ", total_tentativas)
+#facil = total_tentativas
+#medio = total_tentativas -5
+#dificil = total_tentativas -7
 
 
-for rodada in range (1, total_tentativas + 1):
-    print("Tentativa {} de {}".format(rodada, total_tentativas))
-
+for rodada in range(1, total_tentativas + 1):
+    print("Tentativa {} de {}". format(rodada, total_tentativas))
 
     chute_str = input("Digite o seu numero: ")
+
     chute = int(chute_str)
 
-    if(chute <1 or chute > 100):
+    if(chute < 1 or chute > 100):
         print("O número deve ser entre 1 e 100")
         continue
 
-    acertou = chute == numero_secreto
-    maior = chute > numero_secreto
-    menor = chute < numero_secreto
 
-    if(acertou):
-        print("Você acertou")
-        break
-    else:
-        if(maior):
-            print("abaixa")
-        elif(menor):
-            print("Aumenta")
-
-print(numero_secreto)
-print("fim de jogo!")
+    acertou = chute == numero
